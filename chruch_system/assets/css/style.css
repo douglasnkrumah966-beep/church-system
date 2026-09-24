@@ -1,0 +1,166 @@
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: #f0f4f8; color: #1a202c; font-size: 16px; line-height: 1.5;
+}
+a { text-decoration: none; }
+
+label { display: block; font-size: 14px; font-weight: 600; color: #4a5568; margin: 12px 0 6px; }
+input, select, textarea {
+  width: 100%; padding: 12px 14px; font-size: 16px; border: 2px solid #e2e8f0;
+  border-radius: 10px; background: #fff; outline: none; transition: border .2s;
+  font-family: inherit;
+}
+input:focus, select:focus, textarea:focus { border-color: #6b46c1; }
+
+button, .btn-sm {
+  font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer;
+  border: none; border-radius: 10px; padding: 12px 18px;
+  transition: transform .1s, opacity .2s; display: inline-block;
+}
+button:active, .btn-sm:active { transform: scale(0.98); }
+.btn-primary { background: #6b46c1; color: #fff; width: 100%; margin-top: 20px; }
+.btn-primary:hover { background: #553c9a; }
+.btn-sm { padding: 8px 14px; font-size: 14px; }
+.btn-danger { background: #e53e3e; color: #fff; }
+.btn-success { background: #38a169; color: #fff; }
+.btn-ghost { background: #edf2f7; color: #2d3748; }
+
+header {
+  background: #2c5282; color: #fff; padding: 14px 18px;
+  display: flex; justify-content: space-between; align-items: center;
+  position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+header h2 { font-size: 17px; font-weight: 600; }
+header .user-tag { font-size: 12px; opacity: .85; }
+.logout-btn { background: rgba(255,255,255,0.15); color: #fff; padding: 8px 14px;
+              font-size: 13px; border-radius: 8px; }
+
+nav.tabs {
+  display: flex; overflow-x: auto; background: #fff; border-bottom: 2px solid #e2e8f0;
+  position: sticky; top: 60px; z-index: 40; scrollbar-width: none;
+}
+nav.tabs::-webkit-scrollbar { display: none; }
+nav.tabs a {
+  flex: 0 0 auto; color: #718096; padding: 14px 18px; font-size: 14px;
+  white-space: nowrap; border-bottom: 3px solid transparent; font-weight: 600;
+}
+nav.tabs a.active { color: #6b46c1; border-bottom-color: #6b46c1; }
+
+main { padding: 16px; max-width: 1100px; margin: 0 auto; }
+
+.card {
+  background: #fff; border-radius: 14px; padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 16px;
+}
+.card h3 { font-size: 17px; color: #2c5282; margin-bottom: 14px; }
+.grid { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 600px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+.stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (min-width: 600px) { .stat-grid { grid-template-columns: repeat(4, 1fr); } }
+.stat {
+  background: linear-gradient(135deg, #6b46c1, #2c5282); color: #fff;
+  padding: 16px; border-radius: 12px; text-align: center;
+}
+.stat .num { font-size: 22px; font-weight: 700; word-break: break-all; }
+.stat .lbl { font-size: 12px; opacity: .9; margin-top: 4px; }
+
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #edf2f7; }
+th { background: #f7fafc; color: #4a5568; font-size: 12px; text-transform: uppercase; }
+.table-wrap { overflow-x: auto; }
+
+.member-card {
+  display: flex; align-items: center; gap: 12px; padding: 12px;
+  background: #f7fafc; border-radius: 10px; margin-bottom: 8px;
+}
+.avatar {
+  width: 44px; height: 44px; border-radius: 50%; background: #6b46c1; color: #fff;
+  display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0;
+}
+.member-info { flex: 1; min-width: 0; }
+.member-info .name { font-weight: 600; }
+.member-info .meta { font-size: 12px; color: #718096; }
+
+.badge {
+  display: inline-block; padding: 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 600; background: #e9d8fd; color: #553c9a;
+}
+.badge.green { background: #c6f6d5; color: #22543d; }
+.badge.orange { background: #feebc8; color: #7b341e; }
+
+.flash {
+  background: #c6f6d5; color: #22543d; padding: 12px 16px;
+  border-radius: 10px; margin-bottom: 14px; font-size: 14px; font-weight: 600;
+}
+.empty { text-align: center; color: #a0aec0; padding: 30px 10px; font-size: 14px; }
+.search-box { margin-bottom: 12px; }
+.section-title { font-size: 15px; font-weight: 600; color: #4a5568; margin: 20px 0 10px; }
+footer { text-align: center; padding: 20px; color: #a0aec0; font-size: 12px; }
+/* ============ Member picker (contributions) ============ */
+.hidden { display: none !important; }
+
+.member-results {
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  margin-top: 6px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  position: relative;
+  z-index: 20;
+}
+.result-item {
+  padding: 10px 12px;
+  display: flex; align-items: center; gap: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #edf2f7;
+}
+.result-item:last-child { border-bottom: none; }
+.result-item:hover, .result-item:focus { background: #f7fafc; }
+.result-item .name { font-weight: 600; font-size: 14px; }
+.result-item .meta { font-size: 12px; color: #718096; }
+.result-item.empty { color: #a0aec0; cursor: default; justify-content: center; }
+
+.selected-member {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+  background: linear-gradient(135deg, #c6f6d5, #9ae6b4);
+  border-radius: 12px;
+  margin-top: 10px;
+  border: 2px solid #68d391;
+}
+.selected-member .name { font-weight: 700; font-size: 15px; }
+.selected-member .meta { font-size: 12px; color: #22543d; }
+/* Day Born status badges */
+.badge.green  { background: #c6f6d5; color: #22543d; }
+.badge.orange { background: #feebc8; color: #7b341e; }
+.badge        { background: #e9d8fd; color: #553c9a; }
+
+/* Quick action buttons in the records table */
+.row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+/* Member card actions (edit, print, delete) */
+.member-tile-actions {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.member-tile-actions .btn-sm {
+  padding: 4px 8px;
+  font-size: 12px;
+}
+/* Funeral contribution highlight */
+#funeralFields {
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.badge.funeral {
+  background: #fed7d7;
+  color: #742a2a;
+}

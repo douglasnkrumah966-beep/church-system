@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Church Management System — Complete Documentation</title>
+<style>
+/* ============================================================
+   PRINT-OPTIMIZED STYLES
+   ============================================================ */
+@page {
+  size: A4;
+  margin: 18mm 16mm;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #1a202c;
+  background: #f0f4f8;
+  padding: 20px;
+}
+
+.page {
+  background: #fff;
+  max-width: 210mm;
+  margin: 0 auto 20px;
+  padding: 25mm 20mm;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  page-break-after: always;
+}
+
+.page:last-child { page-break-after: auto; }
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .page {
+    box-shadow: none;
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+  }
+  .no-print { display: none !important; }
+  h1, h2, h3 { page-break-after: avoid; }
+  table, pre, .info-box { page-break-inside: avoid; }
+  a { color: #1a365d; text-decoration: none; }
+}
+
+/* ============================================================
+   COVER PAGE
+   ============================================================ */
+.cover {
+  text-align: center;
+  padding: 60mm 20mm;
+  background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #553c9a 100%);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cover-cross {
+  font-size: 72px;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+}
+
+.cover h1 {
+  font-size: 32pt;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid rgba(246,224,94,0.6);
+  padding-bottom: 16px;
+  display: inline-block;
+}
+
+.cover .subtitle {
+  font-size: 14pt;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 40px;
+}
+
+.cover .divider-gold {
+  width: 200px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f6e05e, transparent);
+  margin: 30px auto;
+}
+
+.cover .meta {
+  font-size: 11pt;
+  opacity: 0.85;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+.cover .meta strong {
+  color: #f6e05e;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* ============================================================
+   HEADINGS
+   ============================================================ */
+h1 {
+  font-family: 'Georgia', serif;
+  font-size: 22pt;
+  color: #1a365d;
+  border-bottom: 3px solid #d4af37;
+  padding-bottom: 10px;
+  margin: 0 0 24px;
+  letter-spacing: 0.5px;
+}
+
+h2 {
+  font-family: 'Georgia', serif;
+  font-size: 16pt;
+  color: #2c5282;
+  margin: 30px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+h3 {
+  font-family: 'Georgia', serif;
+  font-size: 13pt;
+  color: #2d3748;
+  margin: 20px 0 10px;
+}
+
+h4 {
+  font-family: -apple-system, sans-serif;
+  font-size: 11pt;
+  color: #4a5568;
+  margin: 16px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+p { margin-bottom: 12px; text-align: justify; }
+
+/* ============================================================
+   TABLES
+   ============================================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 24px;
+  font-size: 10pt;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+th {
+  background: #1a365d;
+  color: #fff;
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 700;
+  font-size: 10pt;
+  letter-spacing: 0.5px;
+}
+
+td {
+  padding: 9px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  vertical-align: top;
+}
+
+tr:nth-child(even) td { background: #f7fafc; }
+
+/* ============================================================
+   INFO BOXES
+   ============================================================ */
+.info-box {
+  background: #ebf8ff;
+  border-left: 4px solid #3182ce;
+  padding: 14px 18px;
+  border-radius: 6px;
+  margin: 16px 0;
+  font-family: -apple-system, sans-serif;
+  font-size: 10pt;
+}
+
+.info-box.warning {
+  background: #fffaf0;
+  border-left-color: #dd6b20;
+}
+
+.info-box.success {
+  background: #f0fff4;
+  border-left-color: #38a169;
+}
+
+.info-box.danger {
+  background: #fff5f5;
+  border-left-color: #e53e3e;
+}
+
+.info-box strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #1a365d;
+  font-size: 11pt;
+}
+
+.info-box.warning strong { color: #7b341e; }
+.info-box.success strong { color: #22543d; }
+.info-box.danger strong { color: #742a2a; }
+
+/* ============================================================
+   CODE / PRE
+   ============================================================ */
+pre {
+  background: #1a202c;
+  color: #f7fafc;
+  padding: 14px 18px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 9pt;
+  line-height: 1.5;
+  overflow-x: auto;
+  margin: 12px 0 20px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+code {
+  background: #edf2f7;
+  color: #1a365d;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 9.5pt;
+}
+
+pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+
+/* ============================================================
+   LISTS
+   ============================================================ */
+ul, ol {
+  margin: 10px 0 16px 24px;
+}
+
+li {
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+ul.checklist { list-style: none; margin-left: 0; }
+ul.checklist li::before {
+  content: '☐  ';
+  color: #3182ce;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+/* ============================================================
+   ROLE BADGES
+   ============================================================ */
+.role {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 9pt;
+  font-weight: 700;
+  color: #fff;
+  font-family: -apple-system, sans-serif;
+  margin-right: 6px;
+}
+
+.role.sysadmin  { background: #1a365d; }
+.role.admin     { background: #805ad5; }
+.role.secretary { background: #3182ce; }
+.role.finance   { background: #38a169; }
+.role.catechist { background: #dd6b20; }
+.role.member    { background: #718096; }
+
+/* ============================================================
+   TABLE OF CONTENTS
+   ============================================================ */
+.toc {
+  background: #f7fafc;
+  padding: 24px 30px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  margin: 20px 0 40px;
+}
+
+.toc h2 {
+  margin-top: 0;
+  border-bottom: 2px solid #d4af37;
+  padding-bottom: 8px;
+}
+
+.toc ol {
+  margin: 16px 0 0 24px;
+  font-size: 11pt;
+  line-height: 2;
+}
+
+.toc a {
+  color: #2c5282;
+  text-decoration: none;
+  border-bottom: 1px dotted #90cdf4;
+}
+
+.toc a:hover { color: #d4af37; }
+
+/* ============================================================
+   QUICK REF CARD
+   ============================================================ */
+.ref-card {
+  border: 2px solid #d4af37;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  background: linear-gradient(135deg, #fffaf0, #fefcbf);
+}
+
+.ref-card h3 {
+  color: #744210;
+  margin-top: 0;
+  text-align: center;
+  border-bottom: 1px solid #d4af37;
+  padding-bottom: 8px;
+}
+
+.ref-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(212,175,55,0.4);
+  font-family: -apple-system, sans-serif;
+  font-size: 10pt;
+}
+
+.ref-row:last-child { border-bottom: none; }
+
+.ref-row .label { color: #744210; font-weight: 600; }
+.ref-row .value { color: #1a202c; font-family: 'Courier New', monospace; font-weight: 700; }
+
+/* ============================================================
+   PAGE NUMBER (for print)
+   ============================================================ */
+.page-number {
+  text-align: center;
+  font-size: 9pt;
+  color: #a0aec0;
+  margin-top: 30px;
+  padding-top: 12px;
+  border-top: 1px solid #e2e8f0;
+  font-family: -apple-system, sans-serif;
+}
+
+/* ============================================================
+   FLOATING PRINT BUTTON (screen only)
+   ============================================================ */
+.print-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: linear-gradient(135deg, #1a365d, #2c5282);
+  color: #fff;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(26,54,93,0.4);
+  font-family: -apple-system, sans-serif;
+  z-index: 9999;
+  transition: all 0.25s ease;
+}
+
+.print-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(26,54,93,0.5);
+}
+
+@media print { .print-btn { display: none !important; } }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">🖨 Save as PDF</button>
+
+<!-- ============================================================
+     PAGE 1 — COVER
+     ============================================================ -->
+<div class="page cover" style="background: linear-gradient(135deg, #1a365d 0%, #2c5282 50%, #553c9a 100%); color: #fff; text-align: center;">
+  <div class="cover-cross">✝️</div>
+  <h1 style="color: #fff; border-color: #f6e05e;">Church Management System</h1>
+  <div class="subtitle" style="color: #fff;">Complete Documentation</div>
+  <div class="divider-gold"></div>
+  <div class="meta" style="color: #fff;">
+    <div><strong>Roman Catholic Church</strong></div>
+    <div style="margin-top: 20px;">Station Management Platform</div>
+    <div style="margin-top: 30px; font-size: 10pt; opacity: 0.75;">
+      Version 1.0 · September 2026
+    </div>
+    <div style="margin-top: 8px; font-size: 10pt; opacity: 0.75;">
+      PHP · MySQL · HTML · CSS · JavaScript
+    </div>
+  </div>
+  <div class="divider-gold" style="margin-top: 40px;"></div>
+  <div style="font-size: 10pt; opacity: 0.7; margin-top: 20px;">
+    A complete, mobile-friendly system for parish administration
+  </div>
+</div>
+
+<!-- ============================================================
+     PAGE 2 — TABLE OF CONTENTS
+     ============================================================ -->
+<div class="page">
+  <h1>Table of Contents</h1>
+  <div class="toc">
+    <h2 style="border: none; margin: 0 0 16px; padding: 0; font-size: 14pt;">Sections</h2>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#overview">System Overview</a></li>
+      <li><a href="#roles">User Roles &amp; Access</a></li>
+      <li><a href="#install">Installation Guide</a></li>
+      <li><a href="#login">Login Information</a></li>
+      <li><a href="#structure">Folder Structure</a></li>
+      <li><a href="#database">Database Tables</a></li>
+      <li><a href="#admin">Admin Guide</a></li>
+      <li><a href="#secretary">Secretary Guide</a></li>
+      <li><a href="#finance">Finance Officer Guide</a></li>
+      <li><a href="#catechist">Catechist Guide</a></li>
+      <li><a href="#member">Member Guide</a></li>
+      <li><a href="#backup">Backup &amp; Recovery</a></li>
+      <li><a href="#maintenance">Maintenance Mode</a></li>
+      <li><a href="#troubleshoot">Troubleshooting</a></li>
+      <li><a href="#quickref">Quick Reference Card</a></li>
+    </ol>
+  </div>
+
+  <div class="info-box success" style="margin-top: 40px;">
+    <strong>About This Document</strong>
+    This guide covers everything you need to install, use, and maintain the Church Management System. Print it and keep a copy at the parish office.
+  </div>
+
+  <div class="page-number">Page 2</div>
+</div>
+
+<!-- ============================================================
+     PAGE 3 — INTRODUCTION
+     ============================================================ -->
+<div class="page" id="intro">
+  <h1>1. Introduction</h1>
+
+  <p>The Church Management System is a complete, mobile-friendly platform designed to serve the administrative needs of a Roman Catholic parish station.</p>
+
+  <h2>Purpose</h2>
+  <p>This system helps the parish office, secretary, finance officer, catechist, and priest manage:</p>
+  <ul>
+    <li><strong>Members</strong> — registration, photos, contact details</li>
+    <li><strong>Sacraments</strong> — Baptism, First Holy Communion, Confirmation, Marriage</li>
+    <li><strong>Day Born Groups</strong> — Sunday Born through Saturday Born</li>
+    <li><strong>Attendance</strong> — catechism and parish events</li>
+    <li><strong>Finance</strong> — collections, contributions, expenses, cashbook</li>
+    <li><strong>Communication</strong> — WhatsApp groups and bulk messaging</li>
+  </ul>
+
+  <h2>Key Features</h2>
+  <ul>
+    <li>✅ Multi-role access with distinct dashboards</li>
+    <li>✅ Mobile-friendly interface — works on phones, tablets, and computers</li>
+    <li>✅ Ghana Cedis (GH₵) as the default currency</li>
+    <li>✅ Timezone set to Africa/Accra</li>
+    <li>✅ Member photos with upload support</li>
+    <li>✅ Automated login creation for new members</li>
+    <li>✅ Cashbook with running balance</li>
+    <li>✅ Funeral contribution tracking with WhatsApp thank-you</li>
+    <li>✅ Backup and restore functionality</li>
+    <li>✅ Activity logs for auditing</li>
+    <li>✅ Maintenance mode for safe updates</li>
+  </ul>
+
+  <h2>Requirements</h2>
+  <table>
+    <tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr>
+    <tr><td>Operating System</td><td>Windows 10</td><td>Windows 11</td></tr>
+    <tr><td>Web Server</td><td>Apache 2.4</td><td>XAMPP 8.2+</td></tr>
+    <tr><td>PHP</td><td>7.4</td><td>8.1 or later</td></tr>
+    <tr><td>MySQL / MariaDB</td><td>5.7</td><td>10.4 or later</td></tr>
+    <tr><td>Browser</td><td>Any modern browser</td><td>Chrome, Edge, Firefox</td></tr>
+  </table>
+
+  <div class="page-number">Page 3</div>
+</div>
+
+<!-- ============================================================
+     PAGE 4 — SYSTEM OVERVIEW
+     ============================================================ -->
+<div class="page" id="overview">
+  <h1>2. System Overview</h1>
+
+  <p>The system is divided into <strong>five independent areas</strong>, each with its own color theme and menu. Each user is assigned to a single role and only sees their own area.</p>
+
+  <table>
+    <tr>
+      <th>Area</th>
+      <th>Color</th>
+      <th>Icon</th>
+      <th>Purpose</th>
+    </tr>
+    <tr>
+      <td><span class="role sysadmin">System Admin</span></td>
+      <td>Navy</td>
+      <td>🔧</td>
+      <td>Technical management only</td>
+    </tr>
+    <tr>
+      <td><span class="role admin">Station Admin</span></td>
+      <td>Purple</td>
+      <td>✝️</td>
+      <td>Full church operations</td>
+    </tr>
+    <tr>
+      <td><span class="role secretary">Secretary</span></td>
+      <td>Blue</td>
+      <td>✍️</td>
+      <td>Members, sacraments, attendance</td>
+    </tr>
+    <tr>
+      <td><span class="role finance">Finance Officer</span></td>
+      <td>Green</td>
+      <td>💰</td>
+      <td>Collections, expenses, reports</td>
+    </tr>
+    <tr>
+      <td><span class="role catechist">Catechist</span></td>
+      <td>Orange</td>
+      <td>📖</td>
+      <td>Sacraments and attendance</td>
+    </tr>
+    <tr>
+      <td><span class="role member">Member</span></td>
+      <td>Purple</td>
+      <td>🙏</td>
+      <td>Personal portal</td>
+    </tr>
+  </table>
+
+  <h2>How It Works</h2>
+  <ol>
+    <li>User opens the login page</li>
+    <li>Enters their username and password</li>
+    <li>System checks credentials against the <code>users</code> table</li>
+    <li>User is redirected to their role-specific dashboard</li>
+    <li>Menu options change based on role</li>
+    <li>All actions are logged in <code>activity_logs</code></li>
+  </ol>
+
+  <div class="info-box success">
+    <strong>Simple for everyone</strong>
+    Members log in with their <em>phone number</em> as username. Staff use simple names like <code>secretary</code> or <code>finance</code>. Everyone sees only what they need.
+  </div>
+
+  <div class="page-number">Page 4</div>
+</div>
+
+<!-- ============================================================
+     PAGE 5 — USER ROLES
+     ============================================================ -->
+<div class="page" id="roles">
+  <h1>3. User Roles &amp; Access</h1>
+
+  <h2><span class="role sysadmin">🔧 System Administrator</span></h2>
+  <p><strong>Purpose:</strong> Technical management only — never touches church operations.</p>
+  <p><strong>Can access:</strong></p>
+  <ul>
+    <li>User accounts, roles, permissions</li>
+    <li>Security settings, backups</li>
+    <li>Database browser, system logs</li>
+    <li>Activity logs, settings, maintenance mode</li>
+  </ul>
+  <p><strong>Cannot access:</strong> Members, Sacraments, Finance, Reports, WhatsApp</p>
+
+  <h2><span class="role admin">✝️ Station Administrator</span></h2>
+  <p><strong>Purpose:</strong> Parish leadership (usually the priest).</p>
+  <p><strong>Can access:</strong> Everything except technical pages.</p>
+
+  <h2><span class="role secretary">✍️ Station Secretary</span></h2>
+  <p><strong>Purpose:</strong> Parish records.</p>
+  <p><strong>Can access:</strong></p>
+  <ul>
+    <li>Members — register, edit, view cards</li>
+    <li>Sacraments — record</li>
+    <li>Day Born dashboards</li>
+    <li>Attendance &amp; reports</li>
+    <li>WhatsApp groups &amp; bulk messages</li>
+  </ul>
+
+  <h2><span class="role finance">💰 Finance Officer</span></h2>
+  <p><strong>Purpose:</strong> Money management.</p>
+  <p><strong>Can access:</strong></p>
+  <ul>
+    <li>First Collection, Day Born Collection</li>
+    <li>Contributions (with funeral support)</li>
+    <li>Expenses</li>
+    <li>Cashbook</li>
+    <li>Funeral Report, Reports, Financial Settings</li>
+  </ul>
+
+  <h2><span class="role catechist">📖 Catechist</span></h2>
+  <p><strong>Purpose:</strong> Faith formation.</p>
+  <p><strong>Can access:</strong></p>
+  <ul>
+    <li>Sacraments</li>
+    <li>Members (view only)</li>
+    <li>Attendance &amp; reports</li>
+    <li>WhatsApp groups</li>
+  </ul>
+
+  <h2><span class="role member">🙏 Member</span></h2>
+  <p><strong>Purpose:</strong> Personal access.</p>
+  <p><strong>Can access:</strong></p>
+  <ul>
+    <li>Own profile and photo</li>
+    <li>Own sacraments and giving history</li>
+    <li>View own Day Born group only</li>
+  </ul>
+
+  <div class="page-number">Page 5</div>
+</div>
+
+<!-- ============================================================
+     PAGE 6 — INSTALLATION
+     ============================================================ -->
+<div class="page" id="install">
+  <h1>4. Installation Guide</h1>
+
+  <h2>Step 1 — Install XAMPP</h2>
+  <ol>
+    <li>Download XAMPP from <code>apachefriends.org</code></li>
+    <li>Install to <code>C:\xampp\</code> (default)</li>
+    <li>Open <strong>XAMPP Control Panel</strong></li>
+    <li>Click <strong>Start</strong> next to <em>Apache</em> and <em>MySQL</em></li>
+    <li>Both should show green — meaning they're running</li>
+  </ol>
+
+  <h2>Step 2 — Copy Project Files</h2>
+  <p>Copy the entire <code>chruch_system</code> folder to:</p>
+  <pre>C:\xampp\htdocs\chruch_system\</pre>
+
+  <p>Verify the folder exists with <code>login.php</code> inside:</p>
+  <pre>dir C:\xampp\htdocs\chruch_system\login.php</pre>
+
+  <h2>Step 3 — Create the Database</h2>
+  <ol>
+    <li>Open <code>http://localhost/phpmyadmin</code></li>
+    <li>Click <strong>New</strong> on the left</li>
+    <li>Database name: <code>church_db</code></li>
+    <li>Collation: <code>utf8mb4_general_ci</code></li>
+    <li>Click <strong>Create</strong></li>
+    <li>Click the <strong>Import</strong> tab</li>
+    <li>Choose file: <code>database.sql</code></li>
+    <li>Click <strong>Go</strong></li>
+  </ol>
+
+  <h2>Step 4 — Configure Database Connection</h2>
+  <p>Open <code>config/database.php</code> and verify:</p>
+  <pre>$DB_HOST = 'localhost';
+$DB_NAME = 'church_db';
+$DB_USER = 'root';
+$DB_PASS = '';</pre>
+
+  <h2>Step 5 — Reset Admin Passwords (one time)</h2>
+  <p>Create <code>reset_admin.php</code> in the project root:</p>
+  <pre>&lt;?php
+require_once 'config/database.php';
+$hash = password_hash('password@123', PASSWORD_DEFAULT);
+$pdo-&gt;prepare("UPDATE users SET password = ?")-&gt;execute([$hash]);
+echo "All passwords reset to password@123";</pre>
+  <p>Open <code>http://localhost/chruch_system/reset_admin.php</code>, then <strong>delete the file</strong>.</p>
+
+  <h2>Step 6 — Create Upload Folders</h2>
+  <pre>mkdir C:\xampp\htdocs\chruch_system\uploads\members
+mkdir C:\xampp\htdocs\chruch_system\backups</pre>
+
+  <h2>Step 7 — Test the Login</h2>
+  <p>Open:</p>
+  <pre>http://localhost/chruch_system/login.php</pre>
+  <p>Log in as <code>admin</code> / <code>password@123</code></p>
+
+  <div class="info-box warning">
+    <strong>⚠️ Important</strong>
+    After logging in successfully, immediately change the admin password via <em>My Password</em>. Write the new password down and store it safely.
+  </div>
+
+  <div class="page-number">Page 6</div>
+</div>
+
+<!-- ============================================================
+     PAGE 7 — LOGIN INFO
+     ============================================================ -->
+<div class="page" id="login">
+  <h1>5. Login Information</h1>
+
+  <h2>Default Accounts</h2>
+  <table>
+    <tr>
+      <th>Role</th>
+      <th>Username</th>
+      <th>Password</th>
+    </tr>
+    <tr>
+      <td><span class="role sysadmin">Sysadmin</span></td>
+      <td><code>admin</code></td>
+      <td><code>password@123</code></td>
+    </tr>
+    <tr>
+      <td><span class="role admin">Station Admin</span></td>
+      <td><code>parishadmin</code></td>
+      <td><code>password@123</code></td>
+    </tr>
+    <tr>
+      <td><span class="role secretary">Secretary</span></td>
+      <td><code>secretary</code></td>
+      <td><code>password@123</code></td>
+    </tr>
+    <tr>
+      <td><span class="role finance">Finance</span></td>
+      <td><code>finance</code></td>
+      <td><code>password@123</code></td>
+    </tr>
+    <tr>
+      <td><span class="role catechist">Catechist</span></td>
+      <td><code>catechist</code></td>
+      <td><code>password@123</code></td>
+    </tr>
+    <tr>
+      <td><span class="role member">Member</span></td>
+      <td><em>their phone number</em></td>
+      <td><code>password@123</code></td>
+    </tr>
+  </table>
+
+  <div class="info-box danger">
+    <strong>🔒 Change These Passwords</strong>
+    The default password <code>password@123</code> is only meant for first login. Change every account's password before regular use.
+  </div>
+
+  <h2>How Members Log In</h2>
+  <p>When the secretary registers a new member with a phone number, the system <strong>automatically creates a login</strong>:</p>
+  <ul>
+    <li>Username = the member's phone number (e.g. <code>0541923081</code>)</li>
+    <li>Password = <code>password@123</code> (default)</li>
+    <li>Role = <code>member</code></li>
+    <li>Linked to their member record automatically</li>
+  </ul>
+
+  <h2>Changing Passwords</h2>
+  <ol>
+    <li>Log in with your current password</li>
+    <li>Click <strong>My Password</strong> in your menu</li>
+    <li>Enter current + new + confirm</li>
+    <li>Click <strong>Change Password</strong></li>
+  </ol>
+
+  <h2>Forgot Password?</h2>
+  <p>If a staff member forgets their password:</p>
+  <ol>
+    <li>Log in as sysadmin</li>
+    <li>Go to <strong>Admin → Users</strong></li>
+    <li>Find the user</li>
+    <li>Click the <strong>🔑</strong> button to reset to <code>password@123</code></li>
+    <li>Tell them to change it after logging in</li>
+  </ol>
+
+  <div class="page-number">Page 7</div>
+</div>
+
+<!-- ============================================================
+     PAGE 8 — FOLDER STRUCTURE
+     ============================================================ -->
+<div class="page" id="structure">
+  <h1>6. Folder Structure</h1>
+
+  <p>The entire system is organized into folders, each with a specific purpose.</p>
+
+  <pre>chruch_system/
+│
+├── config/
+│   └── database.php
+│
+├── includes/
+│   ├── auth.php
+│   ├── header.php
+│   ├── footer.php
+│   └── functions.php
+│
+├── assets/
+│   ├── css/style.css
+│   ├── js/app.js
+│   └── images/our-lady.jpg
+│
+├── uploads/
+│   └── members/           ← Member photos
+│
+├── backups/               ← SQL backups
+│
+├── admin/                 ← 12 files (System Admin only)
+│   ├── _layout.php
+│   ├── index.php
+│   ├── users.php
+│   ├── roles.php
+│   ├── permissions.php
+│   ├── security.php
+│   ├── database.php
+│   ├── backups.php
+│   ├── system_logs.php
+│   ├── activity_logs.php
+│   ├── settings.php
+│   └── maintenance.php
+│
+├── finance/               ← 10 files
+│   ├── _layout.php
+│   ├── index.php
+│   ├── first_collection.php
+│   ├── dayborn_collection.php
+│   ├── contributions.php
+│   ├── expenses.php
+│   ├── cashbook.php
+│   ├── funeral_report.php
+│   ├── reports.php
+│   └── financial_settings.php
+│
+├── secretary/             ← 12 files
+│   ├── _layout.php
+│   ├── index.php
+│   ├── members.php
+│   ├── member_edit.php
+│   ├── member_card.php
+│   ├── sacraments.php
+│   ├── dayborn.php
+│   ├── dayborn_group.php
+│   ├── attendance.php
+│   ├── attendance_report.php
+│   ├── wa_groups.php
+│   └── bulk_message.php
+│
+├── catechist/             ← 8 files
+│   ├── _layout.php
+│   ├── index.php
+│   ├── sacraments.php
+│   ├── members.php
+│   ├── member_card.php
+│   ├── attendance.php
+│   ├── attendance_report.php
+│   └── wa_groups.php
+│
+├── member/                ← 6 files
+│   ├── _layout.php
+│   ├── index.php
+│   ├── my_profile.php
+│   ├── my_sacraments.php
+│   ├── my_giving.php
+│   └── my_dayborn.php
+│
+├── login.php
+├── logout.php
+├── index.php              ← Router
+├── change_password.php
+├── receipt.php
+├── maintenance_page.php
+└── database.sql</pre>
+
+  <div class="page-number">Page 8</div>
+</div>
+
+<!-- ============================================================
+     PAGE 9 — DATABASE TABLES
+     ============================================================ -->
+<div class="page" id="database">
+  <h1>7. Database Tables</h1>
+
+  <p>The system uses <strong>15 tables</strong> in the <code>church_db</code> database.</p>
+
+  <h2>Core Tables</h2>
+  <table>
+    <tr><th>Table</th><th>Purpose</th></tr>
+    <tr><td><code>users</code></td><td>Login accounts for all roles</td></tr>
+    <tr><td><code>members</code></td><td>Church member records with photos</td></tr>
+    <tr><td><code>sacraments</code></td><td>Baptism, Communion, Confirmation, etc.</td></tr>
+    <tr><td><code>finances</code></td><td>All income and expense transactions</td></tr>
+    <tr><td><code>settings</code></td><td>Church name, currency, timezone</td></tr>
+  </table>
+
+  <h2>Role &amp; Permission Tables</h2>
+  <table>
+    <tr><th>Table</th><th>Purpose</th></tr>
+    <tr><td><code>roles</code></td><td>Built-in + custom roles</td></tr>
+    <tr><td><code>permissions</code></td><td>Fine-grained permissions per role</td></tr>
+  </table>
+
+  <h2>System Tables</h2>
+  <table>
+    <tr><th>Table</th><th>Purpose</th></tr>
+    <tr><td><code>system_logs</code></td><td>Technical errors and warnings</td></tr>
+    <tr><td><code>activity_logs</code></td><td>Every user action with IP &amp; time</td></tr>
+    <tr><td><code>security_settings</code></td><td>Password rules, session timeout</td></tr>
+    <tr><td><code>maintenance_mode</code></td><td>Maintenance toggle &amp; message</td></tr>
+  </table>
+
+  <h2>Feature Tables</h2>
+  <table>
+    <tr><th>Table</th><th>Purpose</th></tr>
+    <tr><td><code>attendance_sessions</code></td><td>Catechism and meeting sessions</td></tr>
+    <tr><td><code>attendance_records</code></td><td>Who attended each session</td></tr>
+    <tr><td><code>day_born_groups</code></td><td>Sunday Born through Saturday Born</td></tr>
+    <tr><td><code>wa_groups</code></td><td>WhatsApp group links</td></tr>
+    <tr><td><code>wa_group_members</code></td><td>Members tracked in each group</td></tr>
+  </table>
+
+  <div class="info-box warning">
+    <strong>⚠️ Never Edit the Database Directly</strong>
+    Always use the system's interface. Direct SQL edits can break relationships and cause errors.
+  </div>
+
+  <div class="page-number">Page 9</div>
+</div>
+
+<!-- ============================================================
+     PAGE 10 — ADMIN GUIDE
+     ============================================================ -->
+<div class="page" id="admin">
+  <h1>8. Admin Guide (System Administrator)</h1>
+
+  <h2>Dashboard</h2>
+  <p>Shows system health at a glance:</p>
+  <ul>
+    <li>User accounts, system admins, database tables</li>
+    <li>System errors, database size, backups, 24h activity</li>
+    <li>Server info (PHP version, disk space, timezone)</li>
+  </ul>
+
+  <h2>Users</h2>
+  <p>Create and manage all user accounts.</p>
+  <ol>
+    <li>Click <strong>Admin → Users</strong></li>
+    <li>Fill in Full Name, Username, Password, Role</li>
+    <li>Click <strong>Create User</strong></li>
+  </ol>
+  <p>To reset a password: click the <strong>🔑</strong> button next to any user.</p>
+
+  <h2>Roles &amp; Permissions</h2>
+  <ul>
+    <li><strong>Roles</strong> — View the 6 built-in roles + add custom roles</li>
+    <li><strong>Permissions</strong> — Assign fine-grained permissions per role</li>
+  </ul>
+
+  <h2>Security</h2>
+  <ul>
+    <li>Minimum password length (recommended: 8)</li>
+    <li>Require numbers (recommended: Yes)</li>
+    <li>Require symbols (optional)</li>
+    <li>Max login attempts (recommended: 5)</li>
+    <li>Session timeout (recommended: 120 minutes)</li>
+    <li>Force HTTPS (only if SSL certificate installed)</li>
+  </ul>
+
+  <h2>Database Browser</h2>
+  <p>Read-only view of all tables. You can:</p>
+  <ul>
+    <li>Browse each table's rows (max 50)</li>
+    <li>Export any table as CSV</li>
+    <li>Verify data was saved correctly</li>
+  </ul>
+
+  <h2>Backups</h2>
+  <ol>
+    <li>Click <strong>💾 Create Backup</strong></li>
+    <li>Wait for confirmation</li>
+    <li>Click the <strong>⬇</strong> download button</li>
+    <li>Save the SQL file somewhere safe</li>
+  </ol>
+
+  <h2>System Logs &amp; Activity Logs</h2>
+  <ul>
+    <li><strong>System Logs</strong> — technical errors, warnings, info messages</li>
+    <li><strong>Activity Logs</strong> — every user action with time, user, IP</li>
+  </ul>
+
+  <h2>Settings</h2>
+  <ul>
+    <li>Church name (shown in headers and printed documents)</li>
+    <li>Currency symbol (default: GH₵)</li>
+    <li>Timezone (default: Africa/Accra)</li>
+  </ul>
+
+  <h2>Maintenance Mode</h2>
+  <p>Temporarily block non-admin users during updates:</p>
+  <ol>
+    <li>Toggle <strong>Enable Maintenance Mode</strong> ON</li>
+    <li>Choose allowed roles (sysadmin always allowed)</li>
+    <li>Customize the message shown to blocked users</li>
+    <li>Click <strong>Save</strong></li>
+  </ol>
+
+  <div class="page-number">Page 10</div>
+</div>
+
+<!-- ============================================================
+     PAGE 11 — SECRETARY GUIDE
+     ============================================================ -->
+<div class="page" id="secretary">
+  <h1>9. Secretary Guide</h1>
+
+  <h2>Registering a New Member</h2>
+  <ol>
+    <li>Click <strong>Members</strong> in the menu</li>
+    <li>Fill in the registration form:
+      <ul>
+        <li>Full Name (required)</li>
+        <li>Phone Number (required — becomes their login)</li>
+        <li>Gender, Marital Status, Baptism</li>
+        <li>Date of Birth — choose from:
+          <ul>
+            <li><em>Full date</em> — auto-calculates Day Born</li>
+            <li><em>Year only</em> — for older members</li>
+            <li><em>Approximate age</em> — if only age is known</li>
+            <li><em>Not known</em> — with manual Day Born selection</li>
+          </ul>
+        </li>
+        <li>Photo (optional, max 3 MB)</li>
+      </ul>
+    </li>
+    <li>Click <strong>Save Member &amp; Create Login</strong></li>
+  </ol>
+
+  <div class="info-box success">
+    <strong>✅ Login auto-created</strong>
+    The member can now log in with their phone number and the default password <code>password@123</code>.
+  </div>
+
+  <h2>Recording a Sacrament</h2>
+  <ol>
+    <li>Click <strong>Sacraments</strong></li>
+    <li>Select the member</li>
+    <li>Choose sacrament type (Baptism, Communion, Confirmation, etc.)</li>
+    <li>Enter date, minister, place, certificate number</li>
+    <li>Click <strong>Save</strong></li>
+  </ol>
+
+  <h2>Day Born Dashboard</h2>
+  <p>Seven colorful tiles (Sunday Born through Saturday Born). Tap any group to see all members born on that day. Members with the same day born celebrate their birthdays together.</p>
+
+  <h2>Marking Attendance</h2>
+  <ol>
+    <li>Click <strong>Attendance</strong></li>
+    <li>Create a session (title, date, category)</li>
+    <li>For each member, tap <strong>✓ Present</strong> or <strong>🕊 Excused</strong></li>
+    <li>Click <strong>💾 Save Attendance</strong></li>
+  </ol>
+
+  <h2>Attendance Report</h2>
+  <p>Shows attendance rate for each member with a color-coded bar:</p>
+  <ul>
+    <li><strong style="color: #38a169;">Green ≥ 75%</strong> — excellent attendance</li>
+    <li><strong style="color: #dd6b20;">Amber 50–74%</strong> — moderate</li>
+    <li><strong style="color: #e53e3e;">Red &lt; 50%</strong> — needs follow-up</li>
+  </ul>
+
+  <h2>Member ID Card</h2>
+  <ol>
+    <li>Find the member in the Members list</li>
+    <li>Click the <strong>🪪</strong> card icon</li>
+    <li>Click <strong>🖨 Print / Save as PDF</strong></li>
+  </ol>
+
+  <h2>WhatsApp Groups</h2>
+  <ol>
+    <li>Create the group in WhatsApp first</li>
+    <li>Copy the invite link</li>
+    <li>In the system, go to <strong>WhatsApp Groups</strong></li>
+    <li>Paste the link and save</li>
+    <li>Click <strong>💬 Invite</strong> next to each member to send them the link</li>
+  </ol>
+
+  <h2>Bulk Messages</h2>
+  <ol>
+    <li>Click <strong>Bulk Message</strong></li>
+    <li>Choose audience (all members, birthdays today, or a Day Born group)</li>
+    <li>Type your message or pick a template</li>
+    <li>Click <strong>Load Recipients</strong></li>
+    <li>Send to each member with 💬 or copy the phone list for SMS</li>
+  </ol>
+
+  <div class="page-number">Page 11</div>
+</div>
+
+<!-- ============================================================
+     PAGE 12 — FINANCE GUIDE
+     ============================================================ -->
+<div class="page" id="finance">
+  <h1>10. Finance Officer Guide</h1>
+
+  <h2>Dashboard</h2>
+  <ul>
+    <li>Total Income, Total Expenses, Balance</li>
+    <li>This Month and This Year snapshots</li>
+    <li>6-month bar chart (income vs. expenses)</li>
+    <li>Category totals and recent transactions</li>
+  </ul>
+
+  <h2>First Collection</h2>
+  <ol>
+    <li>Click <strong>First Collection</strong></li>
+    <li>Type the collection name (e.g. "First Collection — 8am Mass")</li>
+    <li>Enter amount, date, status</li>
+    <li>Click <strong>Save Record</strong></li>
+  </ol>
+  <p>Mark as <strong>Deposited</strong> once the money is banked.</p>
+
+  <h2>Day Born Collection</h2>
+  <ol>
+    <li>Click <strong>Day Born Collection</strong></li>
+    <li>Pick a Day Born Group (Sunday Born, Monday Born, etc.)</li>
+    <li>Enter amount, date, status</li>
+    <li>Click <strong>Save Record</strong></li>
+  </ol>
+
+  <h2>Contributions</h2>
+  <p>Nine contribution types are available:</p>
+  <ol>
+    <li>Thanksgiving Offering</li>
+    <li>Harvest Contribution</li>
+    <li>Welfare Contribution</li>
+    <li>Building Fund</li>
+    <li>Donation</li>
+    <li>Funeral Contribution</li>
+    <li>Fundraising</li>
+    <li>Special Appeal</li>
+    <li>Other Contribution</li>
+  </ol>
+  <p>Each contribution is linked to a member. The system auto-generates a receipt.</p>
+
+  <h2>Funeral Contributions</h2>
+  <p>When you select <em>Funeral Contribution</em>, extra fields appear:</p>
+  <ul>
+    <li><strong>Contributing For</strong> — name of the deceased</li>
+    <li><strong>Relationship</strong> — Father, Mother, Brother, etc.</li>
+    <li><strong>Payment Method</strong> — Cash, Mobile Money, etc.</li>
+  </ul>
+  <p>After saving, open <strong>Funeral Report</strong> to see all contributions for a deceased and send WhatsApp thank-you messages.</p>
+
+  <h2>Expenses</h2>
+  <p>17 categories: Electricity, Water, Church Maintenance, Cleaning, Stationery, Transportation, Communication, Catechetical Activities, Liturgical Items, Pastoral Activities, Funeral Expenses, Repairs, Salaries / Allowances, Welfare, Events, Bank Charges, Other Expense.</p>
+
+  <h2>Cashbook</h2>
+  <p>The central financial ledger. Automatically pulls from:</p>
+  <ul>
+    <li>First Collection</li>
+    <li>Day Born Collection</li>
+    <li>Contributions</li>
+    <li>Expenses</li>
+  </ul>
+  <p>Shows Opening Balance, all transactions with running balance, and Closing Balance.</p>
+
+  <h2>Reports</h2>
+  <ol>
+    <li>Pick a date range</li>
+    <li>Optionally filter by type, category, or member</li>
+    <li>Click <strong>Generate Report</strong></li>
+    <li>Click <strong>🖨 Print / Save as PDF</strong> for a formal report</li>
+  </ol>
+
+  <div class="page-number">Page 12</div>
+</div>
+
+<!-- ============================================================
+     PAGE 13 — CATECHIST GUIDE
+     ============================================================ -->
+<div class="page" id="catechist">
+  <h1>11. Catechist Guide</h1>
+
+  <h2>Dashboard</h2>
+  <p>Shows members, sacraments, catechism sessions, today's birthdays, recent sacraments, and upcoming birthdays this week.</p>
+
+  <h2>Recording Sacraments</h2>
+  <ol>
+    <li>Click <strong>Sacraments</strong></li>
+    <li>Choose the member and sacrament type</li>
+    <li>Enter date, minister, place, certificate number</li>
+    <li>Save the record</li>
+  </ol>
+  <p>Perfect for recording Baptisms, First Holy Communions, and Confirmations as students complete their preparation.</p>
+
+  <h2>Viewing Members</h2>
+  <p>Read-only view of all members. Search by name or phone. Tap the <strong>🪪</strong> icon to view or print a member card.</p>
+
+  <h2>Attendance — Catechism Sessions</h2>
+  <ol>
+    <li>Click <strong>Attendance</strong></li>
+    <li>Create a session:
+      <ul>
+        <li>Title (e.g. "Sunday Catechism — Class 3")</li>
+        <li>Date</li>
+        <li>Category (Catechism, First Communion Class, Confirmation Class, Sunday School, Bible Study, Youth Meeting)</li>
+        <li>Note (e.g. "Topic: The Sacraments")</li>
+      </ul>
+    </li>
+    <li>Mark each student:
+      <ul>
+        <li><strong>✓ Present</strong> — attended</li>
+        <li><strong>🕊 Excused</strong> — absent with reason</li>
+        <li><em>unmarked</em> — absent without notice</li>
+      </ul>
+    </li>
+    <li>Click <strong>💾 Save Attendance</strong></li>
+  </ol>
+
+  <h2>Attendance Report</h2>
+  <p>Shows the attendance rate for each student. Use it to:</p>
+  <ul>
+    <li>Identify students with low attendance</li>
+    <li>Follow up with parents</li>
+    <li>Print reports for parent-teacher meetings</li>
+  </ul>
+
+  <h2>WhatsApp Groups for Catechism</h2>
+  <p>Create groups for:</p>
+  <ul>
+    <li>Catechism classes (one per class level)</li>
+    <li>First Communion preparation</li>
+    <li>Confirmation preparation</li>
+    <li>Sunday School reminders</li>
+    <li>Parent communication</li>
+  </ul>
+  <p>Send invites to each student or parent, or share the group link.</p>
+
+  <div class="info-box success">
+    <strong>💡 Best Practice</strong>
+    Create the session <em>before</em> class starts. Mark attendance during the class. Save before students leave.
+  </div>
+
+  <div class="page-number">Page 13</div>
+</div>
+
+<!-- ============================================================
+     PAGE 14 — MEMBER GUIDE
+     ============================================================ -->
+<div class="page" id="member">
+  <h1>12. Member Guide</h1>
+
+  <h2>Logging In</h2>
+  <p>Members log in with their <strong>phone number</strong> as username and the default password <code>password@123</code>.</p>
+  <p>Example: if your phone number is <code>0541923081</code>, your username is <code>0541923081</code>.</p>
+
+  <h2>My Dashboard</h2>
+  <p>When you log in, you see:</p>
+  <ul>
+    <li>Your profile photo, name, day born</li>
+    <li>Birthday countdown</li>
+    <li>Summary of your sacraments</li>
+    <li>Your total giving this year</li>
+    <li>Others celebrating this week</li>
+  </ul>
+
+  <h2>My Profile</h2>
+  <p>You can update:</p>
+  <ul>
+    <li>Your photo (max 3 MB)</li>
+    <li>Phone number</li>
+    <li>Place of birth</li>
+    <li>Marital status</li>
+  </ul>
+  <p>You <strong>cannot</strong> change your name, date of birth, or baptism status — contact the Station Office.</p>
+
+  <h2>My Sacraments</h2>
+  <p>View all sacraments you've received with dates and ministers.</p>
+
+  <h2>My Giving</h2>
+  <p>See your complete giving history:</p>
+  <ul>
+    <li>Total given (all time)</li>
+    <li>Every contribution with date, type, and amount</li>
+    <li>Beneficiary (if any) for funeral contributions</li>
+  </ul>
+
+  <h2>Day Born</h2>
+  <p>View members of your <strong>own group only</strong>. For example, a Tuesday-born member sees only other Tuesday-born members.</p>
+
+  <h2>My Password</h2>
+  <p>Change your password anytime:</p>
+  <ol>
+    <li>Click <strong>My Password</strong></li>
+    <li>Enter current password</li>
+    <li>Enter new password twice</li>
+    <li>Click <strong>Change Password</strong></li>
+  </ol>
+
+  <div class="info-box warning">
+    <strong>🔒 Change Your Default Password</strong>
+    After your first login, change your password from <code>password@123</code> to something only you know.
+  </div>
+
+  <div class="page-number">Page 14</div>
+</div>
+
+<!-- ============================================================
+     PAGE 15 — BACKUP & RECOVERY
+     ============================================================ -->
+<div class="page" id="backup">
+  <h1>13. Backup &amp; Recovery</h1>
+
+  <h2>Why Backups Matter</h2>
+  <p>Backups protect the parish records against:</p>
+  <ul>
+    <li>Accidental deletion</li>
+    <li>Computer failure</li>
+    <li>Virus or ransomware</li>
+    <li>Power outage during a write</li>
+    <li>Human error</li>
+  </ul>
+
+  <h2>Creating a Backup</h2>
+  <ol>
+    <li>Log in as sysadmin</li>
+    <li>Click <strong>Admin → Backups</strong></li>
+    <li>Click <strong>💾 Create Backup</strong></li>
+    <li>Wait for the confirmation message</li>
+    <li>Click the <strong>⬇</strong> download button</li>
+    <li>Save the SQL file to your computer</li>
+  </ol>
+
+  <h2>Backup Retention — Best Practice</h2>
+  <table>
+    <tr><th>Frequency</th><th>Keep</th><th>Store</th></tr>
+    <tr><td>Daily</td><td>7 days</td><td>Server's <code>/backups/</code> folder</td></tr>
+    <tr><td>Weekly</td><td>4 weeks</td><td>External drive</td></tr>
+    <tr><td>Monthly</td><td>12 months</td><td>Cloud (Google Drive, Dropbox)</td></tr>
+  </table>
+
+  <h2>Restoring from a Backup</h2>
+  <p>If the database is corrupted or lost:</p>
+  <ol>
+    <li>Open <code>http://localhost/phpmyadmin</code></li>
+    <li>Click on <code>church_db</code> on the left</li>
+    <li>Click the <strong>Import</strong> tab</li>
+    <li>Choose the backup <code>.sql</code> file</li>
+    <li>Click <strong>Go</strong></li>
+    <li>Log back in to the system</li>
+  </ol>
+
+  <div class="info-box danger">
+    <strong>⚠️ Before Restoring</strong>
+    Restoring <em>overwrites</em> the live database. Any data added since the backup was made will be lost. Only restore when absolutely necessary.
+  </div>
+
+  <h2>Automated Backups (Optional)</h2>
+  <p>On Windows, use <strong>Task Scheduler</strong> to run this command daily:</p>
+  <pre>"C:\xampp\mysql\bin\mysqldump.exe" -u root church_db &gt; "D:\Backups\church_%date:~10,4%-%date:~4,2%-%date:~7,2%.sql"</pre>
+
+  <h2>Emergency Recovery</h2>
+  <p>If you lose the sysadmin password:</p>
+  <ol>
+    <li>Create <code>reset_admin.php</code> in the root:
+      <pre>&lt;?php
+require_once 'config/database.php';
+$hash = password_hash('password@123', PASSWORD_DEFAULT);
+$pdo-&gt;prepare("UPDATE users SET password = ? WHERE username = 'admin'")-&gt;execute([$hash]);
+echo "Reset complete";</pre>
+    </li>
+    <li>Open <code>http://localhost/chruch_system/reset_admin.php</code></li>
+    <li>Log in with <code>admin</code> / <code>password@123</code></li>
+    <li><strong>Delete the file immediately</strong></li>
+  </ol>
+
+  <div class="page-number">Page 15</div>
+</div>
+
+<!-- ============================================================
+     PAGE 16 — MAINTENANCE MODE
+     ============================================================ -->
+<div class="page" id="maintenance">
+  <h1>14. Maintenance Mode</h1>
+
+  <h2>What It Does</h2>
+  <p>Maintenance mode temporarily blocks all users except those you choose. It's used when:</p>
+  <ul>
+    <li>Making database updates</li>
+    <li>Taking a full backup</li>
+    <li>Fixing critical bugs</li>
+    <li>Performing system migrations</li>
+    <li>Training new staff</li>
+  </ul>
+
+  <h2>Enabling Maintenance Mode</h2>
+  <ol>
+    <li>Log in as sysadmin</li>
+    <li>Click <strong>Admin → Maintenance</strong></li>
+    <li>Toggle <strong>Enable Maintenance Mode</strong> ON</li>
+    <li>Select which roles can still access (Sysadmin is always allowed)</li>
+    <li>Customize the message shown to blocked users</li>
+    <li>Click <strong>💾 Save</strong></li>
+  </ol>
+
+  <h2>What Blocked Users See</h2>
+  <p>A clean page with the church name, an icon, and your custom message — for example:</p>
+  <div class="info-box warning" style="background: #1a202c; color: #e2e8f0; border-left-color: #f6e05e;">
+    <div style="text-align: center; padding: 12px;">
+      <div style="font-size: 30px;">🛠</div>
+      <div style="font-weight: 700; color: #f6e05e; margin: 8px 0 4px;">Roman Catholic Church</div>
+      <div style="opacity: 0.85; font-size: 10pt;">System is under maintenance.<br>Please check back shortly.</div>
+    </div>
+  </div>
+
+  <h2>Disabling Maintenance Mode</h2>
+  <ol>
+    <li>Log in as sysadmin</li>
+    <li>Go to <strong>Admin → Maintenance</strong></li>
+    <li>Toggle <strong>OFF</strong></li>
+    <li>Click <strong>Save</strong></li>
+  </ol>
+
+  <div class="info-box danger">
+    <strong>⚠️ Remember to Turn It Off</strong>
+    If you forget, parishioners cannot access the system. Check the status banner at the top of the maintenance page — it shows ON or OFF clearly.
+  </div>
+
+  <h2>How It Works Behind the Scenes</h2>
+  <p>Every page load checks the <code>maintenance_mode</code> table:</p>
+  <ol>
+    <li>If maintenance is OFF → normal access</li>
+    <li>If maintenance is ON:
+      <ul>
+        <li>Sysadmin always allowed</li>
+        <li>If the user's role is in the allowed list → normal access</li>
+        <li>Otherwise → redirected to <code>maintenance_page.php</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <div class="page-number">Page 16</div>
+</div>
+
+<!-- ============================================================
+     PAGE 17 — TROUBLESHOOTING
+     ============================================================ -->
+<div class="page" id="troubleshoot">
+  <h1>15. Troubleshooting</h1>
+
+  <h2>Login Issues</h2>
+  <table>
+    <tr><th>Problem</th><th>Solution</th></tr>
+    <tr><td>"Invalid username or password"</td><td>Reset the password via <code>reset_admin.php</code> (delete after)</td></tr>
+    <tr><td>Page just reloads, no error</td><td>Check that the target dashboard file exists</td></tr>
+    <tr><td>Login page shows blank</td><td>Check PHP error log at <code>C:\xampp\apache\logs\error.log</code></td></tr>
+    <tr><td>"Access denied" after login</td><td>Verify your role in <code>users</code> table</td></tr>
+  </table>
+
+  <h2>Image / Photo Issues</h2>
+  <table>
+    <tr><th>Problem</th><th>Solution</th></tr>
+    <tr><td>Photo doesn't show</td><td>Check file exists in <code>uploads/members/</code> and has size &gt; 0</td></tr>
+    <tr><td>Upload fails</td><td>Ensure folder <code>uploads/members/</code> exists and is writable</td></tr>
+    <tr><td>"Failed to open stream"</td><td>File path is wrong — verify with <code>dir</code></td></tr>
+  </table>
+
+  <h2>Database Issues</h2>
+  <table>
+    <tr><th>Problem</th><th>Solution</th></tr>
+    <tr><td>"Database connection failed"</td><td>Start MySQL in XAMPP Control Panel</td></tr>
+    <tr><td>"Table doesn't exist"</td><td>Import <code>database.sql</code> in phpMyAdmin</td></tr>
+    <tr><td>"Duplicate column"</td><td>Safe to ignore — column already exists</td></tr>
+  </table>
+
+  <h2>Header Already Sent Warning</h2>
+  <p>This means HTML was output before a redirect. Fix:</p>
+  <ul>
+    <li>All form processing and redirects must happen <strong>before</strong> including <code>_layout.php</code></li>
+    <li>Move <code>if ($_SERVER['REQUEST_METHOD'] === 'POST') { ... redirect(); }</code> to the top of the file</li>
+  </ul>
+
+  <h2>System Slow or Unresponsive</h2>
+  <ul>
+    <li>Check disk space in Admin → Dashboard</li>
+    <li>Clear old backups (Admin → Backups)</li>
+    <li>Clear old logs (Admin → Activity Logs → Clean Old)</li>
+    <li>Restart Apache and MySQL in XAMPP</li>
+  </ul>
+
+  <h2>Time / Date Wrong</h2>
+  <ol>
+    <li>Admin → Settings</li>
+    <li>Set timezone to <strong>Africa/Accra</strong></li>
+    <li>Save</li>
+  </ol>
+
+  <h2>Emergency Contacts</h2>
+  <table>
+    <tr><th>Role</th><th>Name</th><th>Phone</th></tr>
+    <tr><td>Parish Priest</td><td>________________</td><td>________________</td></tr>
+    <tr><td>System Admin</td><td>________________</td><td>________________</td></tr>
+    <tr><td>IT Support</td><td>________________</td><td>________________</td></tr>
+  </table>
+
+  <div class="page-number">Page 17</div>
+</div>
+
+<!-- ============================================================
+     PAGE 18 — QUICK REFERENCE CARD
+     ============================================================ -->
+<div class="page" id="quickref">
+  <h1>16. Quick Reference Card</h1>
+
+  <p>Print this page and pin it near the parish computer.</p>
+
+  <div class="ref-card">
+    <h3>✝️ LOGIN DETAILS ✝️</h3>
+    <div class="ref-row">
+      <span class="label">Website URL</span>
+      <span class="value">http://localhost/chruch_system/login.php</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Sysadmin</span>
+      <span class="value">admin / password@123</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Priest</span>
+      <span class="value">parishadmin / password@123</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Secretary</span>
+      <span class="value">secretary / password@123</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Finance</span>
+      <span class="value">finance / password@123</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Catechist</span>
+      <span class="value">catechist / password@123</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Member</span>
+      <span class="value">phone number / password@123</span>
+    </div>
+  </div>
+
+  <div class="ref-card" style="background: linear-gradient(135deg, #f0fff4, #c6f6d5); border-color: #38a169;">
+    <h3 style="color: #22543d; border-color: #38a169;">⚡ QUICK ACTIONS</h3>
+    <div class="ref-row">
+      <span class="label">Register new member</span>
+      <span class="value">Members → Fill form → Save</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Record a sacrament</span>
+      <span class="value">Sacraments → Fill form → Save</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Record collection</span>
+      <span class="value">Finance → First Collection</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Record expense</span>
+      <span class="value">Finance → Expenses</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Mark attendance</span>
+      <span class="value">Attendance → Create session → Mark</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Create backup</span>
+      <span class="value">Admin → Backups → 💾 Create</span>
+    </div>
+  </div>
+
+  <div class="ref-card" style="background: linear-gradient(135deg, #fff5f5, #fed7d7); border-color: #e53e3e;">
+    <h3 style="color: #742a2a; border-color: #e53e3e;">🚨 EMERGENCY</h3>
+    <div class="ref-row">
+      <span class="label">Forgot password</span>
+      <span class="value">Call the System Admin</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">System slow</span>
+      <span class="value">Restart XAMPP Apache + MySQL</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Data lost</span>
+      <span class="value">Restore latest backup (phpMyAdmin)</span>
+    </div>
+    <div class="ref-row">
+      <span class="label">Website down</span>
+      <span class="value">Check XAMPP Control Panel</span>
+    </div>
+  </div>
+
+  <div class="info-box warning" style="margin-top: 20px;">
+    <strong>🔒 Security Reminder</strong>
+    After first login, change every default password. Store the new passwords securely and never share them by email or WhatsApp.
+  </div>
+
+  <div style="text-align: center; margin-top: 40px; padding-top: 30px; border-top: 2px solid #d4af37;">
+    <div style="font-size: 30px; margin-bottom: 12px;">✝️</div>
+    <div style="font-family: 'Georgia', serif; font-size: 16pt; color: #1a365d;">
+      <strong><?= "Roman Catholic Church" ?></strong>
+    </div>
+    <div style="font-size: 10pt; color: #718096; margin-top: 8px; letter-spacing: 2px;">
+      STATION MANAGEMENT SYSTEM
+    </div>
+    <div style="font-size: 10pt; color: #718096; margin-top: 20px; line-height: 1.8;">
+      May God bless your parish ministry.<br>
+      <em>Ave Maria!</em>
+    </div>
+  </div>
+
+  <div class="page-number">Page 18</div>
+</div>
+
+</body>
+</html>
